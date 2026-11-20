@@ -58,7 +58,12 @@ const store = {
     saved.thoughts = [...saved.thoughts, t].slice(-200); save();
     db?.insert('dl_thoughts', { text: t }, t).catch(() => {});
   },
-  removeThought(i) { saved.thoughts = saved.thoughts.filter((_, k) => k !== i); save(); },
+  removeThought(i) {
+    const t = saved.thoughts[i];
+    saved.thoughts = saved.thoughts.filter((_, k) => k !== i); save();
+    // and from the database, or it would come back next time (the newest record with this text)
+    if (db && t !== undefined) db.list('dl_thoughts', { q: t, limit: 50 }).then((rows) => { const r = rows.find((x) => x.data?.text === t); return r && db.remove('dl_thoughts', r.id); }).catch(() => {});
+  },
   choices: () => saved.choices,
   addChoice(c) {
     saved.choices = [...saved.choices, c].slice(-500); save();
