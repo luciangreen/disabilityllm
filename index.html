@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Disability LLM</title>
+  <link rel="stylesheet" href="/shared/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="dl-top">
+    <h1>Disability LLM</h1>
+    <span class="dl-sub quiet">algorithms, not a language model</span>
+    <span class="dl-spacer"></span>
+    <label class="dl-year">Explain at <select id="year" aria-label="Year level for explanations"></select></label>
+    <label class="dl-check" title="Skip questions you have answered the same way before (each skip is listed, and can be asked again)"><input type="checkbox" id="predictOn"> Predict my choices</label>
+    <button id="germBtn" class="dl-yellow" title="Starting germs for new algorithms, from your thoughts">Disabled</button>
+    <button id="tabLearn" class="dl-tab" aria-controls="learn">Classroom</button>
+    <button id="tabWork" class="dl-tab" aria-controls="work">Applaud</button>
+  </header>
+
+  <main class="dl-main" id="main">
+    <section class="dl-pane" id="learn" aria-labelledby="learnHead">
+      <h2 class="dl-panehead"><button id="learnHead" aria-expanded="true" aria-controls="learnBody"><span class="dl-caret" aria-hidden="true">▾</span> Classroom <span class="quiet">· learning</span></button></h2>
+      <div class="dl-panebody" id="learnBody">
+        <nav class="dl-modes" aria-label="Classroom">
+          <button data-mode="build" class="on">From a sentence</button>
+          <button data-mode="courses">Teach yourself</button>
+          <button data-mode="up">Go up a level</button>
+          <button data-mode="ideas">Ideas</button>
+          <button data-mode="thoughts">My thoughts</button>
+        </nav>
+        <div id="lesson" class="dl-lesson" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="dl-pane" id="work" aria-labelledby="workHead">
+      <h2 class="dl-panehead"><button id="workHead" aria-expanded="true" aria-controls="workBody"><span class="dl-caret" aria-hidden="true">▾</span> Applaud <span class="quiet">· working</span></button></h2>
+      <div class="dl-panebody" id="workBody">
+        <div class="ap-bar">
+          <input id="apFile" aria-label="File" placeholder="algorithms/my_algorithm.pl">
+          <button id="apOpen" title="Open the file">Open</button>
+          <button id="apSave" title="Save the file">Save</button>
+          <span class="dl-spacer"></span>
+          <button id="apCheck" title="Check the clauses">Check</button>
+          <button id="apRun" title="Run the examples in Prolog">Run examples</button>
+          <button id="apNext" class="primary" title="The one next step">Next step</button>
+        </div>
+        <div class="ap-sig">
+          <label>Signature <input id="apSig" placeholder="total(+list(int), -int)" aria-label="Signature: name and argument types"></label>
+          <button id="apSkel" title="Write the base case and the recursive case for these types">Skeleton</button>
+        </div>
+        <textarea id="apCode" class="ap-code" spellcheck="false" aria-label="Prolog"></textarea>
+        <label class="ap-label" for="apEx">Examples, as queries with their answers</label>
+        <textarea id="apEx" class="ap-ex" spellcheck="false" placeholder="?- total([1,2,3], S). S = 6.&#10;?- total([], S). S = 0."></textarea>
+        <div id="apNotes" class="ap-notes" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dl-foot">
+    <div class="dl-bars">
+      <div class="dl-barrow"><span class="dl-barlabel">This section</span><div class="dl-progress" role="progressbar" aria-label="This section" aria-valuemin="0" aria-valuemax="100" id="progressSec"><div class="fill" id="fillSec"></div></div><span id="textSec" class="quiet dl-bartext"></span></div>
+      <div class="dl-barrow"><span class="dl-barlabel">Overall</span><div class="dl-progress all" role="progressbar" aria-label="Overall" aria-valuemin="0" aria-valuemax="100" id="progressAll"><div class="fill" id="fillAll"></div></div><span id="textAll" class="quiet dl-bartext"></span></div>
+    </div>
+    <button id="summaryBtn" title="A summary of this section">Summary</button>
+    <button id="ffBtn" title="Skip to the end of this section, with the answers shown">Fast forward</button>
+    <button id="restartBtn" title="Start this again">Start again</button>
+  </footer>
+
+  <div id="buddy" class="dl-buddy" aria-live="polite">
+    <div id="buddyBubble" class="dl-bubble hidden"></div>
+    <button id="buddyFig" class="dl-fig" title="Your companion (click to change)" aria-label="Companion"></button>
+  </div>
+</body>
+</html>

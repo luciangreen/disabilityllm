@@ -1,0 +1,200 @@
+{"n":1,"name":"typeOf","input":[["a","b"]],"output":"list(atom)"}
+{"n":2,"name":"join","input":["int","atom"],"output":null}
+{"n":3,"name":"lemma","input":["class"],"output":"class"}
+{"n":4,"name":"digest","input":["remove the negative numbers"],"output":{"name":"remove_negative","numbers":[],"dataType":"list(int)","leads":["rest/2","drop_negative/2","dedup/2"]}}
+{"n":5,"name":"synthesise","input":[["how many different numbers",[[[1,1,2,3,3],3],[[5],1],[[],0]]],"builtin"],"output":{"found":true,"name":"different","chain":["set:null","count:null"],"program":"% different(+In, -Out): how many different numbers\n% puts the numbers in order and takes out repeats, then counts how many things are in the list.\ndifferent(In, Out) :-\n    set(In, A),\n    count(A, Out).\n\nset(L, S) :- sort(L, S).\n\ncount(L, N) :- length(L, N).\n","examples":[[[1,1,2,3,3],3],[[5],1],[[],0]]}}
+{"n":6,"name":"predict","input":[[{"kind":"lead","context":"keep:even","choice":"no"},{"kind":"lead","context":"","choice":"no"},{"kind":"lead","context":"","choice":"no"},{"kind":"lead","context":"sum:null","choice":"builtin"},{"kind":"lead","context":"","choice":"yes"}],"lead","sum:null"],"output":{"choice":"builtin","count":1,"share":1}}
+{"n":7,"name":"skip","input":[[{"kind":"lead","context":"","choice":"recursion"},{"kind":"methodology","context":"keep:even","choice":"yes"},{"kind":"methodology","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"","choice":"builtin"},{"kind":"lead","context":"","choice":"no"}],"lead","",true],"output":null}
+{"n":8,"name":"remember","input":[[{"kind":"lead","context":"","choice":"yes"},{"kind":"methodology","context":"keep:even","choice":"yes"},{"kind":"methodology","context":"keep:even","choice":"no"},{"kind":"lead","context":"keep:even","choice":"builtin"}],{"kind":"","context":"x","choice":"no"}],"output":4}
+{"n":9,"name":"decide","input":[{"lastInput":25000,"lastResolved":0,"lastSpoke":1000,"problem":null,"thoughts":["tea","logic"],"turn":7,"concentrating":false},43000],"output":{"act":"quiet","text":""}}
+{"n":10,"name":"answer","input":["interpreter",0,false],"output":{"step":0,"done":0,"wrong":1}}
+{"n":11,"name":"band","input":[16],"output":"uni"}
+{"n":12,"name":"progress","input":[3],"output":{"done":3,"total":22,"fraction":0.136364}}
+{"n":13,"name":"induce","input":[["yes","no","maybe"]],"output":{"kind":"choice","prefix":null,"unit":null,"suffix":null,"min":null,"dcg":"s --> \"yes\".\ns --> \"no\".\ns --> \"maybe\"."}}
+{"n":14,"name":"accepts","input":[["xaby","xababy"],"xabababy"],"output":true}
+{"n":15,"name":"meltdown","input":[["reverse","reverse"]],"output":{"found":true,"rule":"reverse-twice","after":[],"prolog":null,"ok":true}}
+{"n":16,"name":"abstract","input":[["addeach:1","timeseach:2"]],"output":{"ok":true,"from":["add_each_1","times_each_2"],"params":[["Op","+","*"],["P","1","2"]],"general":"gen(Op, P, [], []).\ngen(Op, P, [X|Xs], [Y|Ys]) :- (E1 =.. [Op, X, P], Y is E1), gen(Op, P, Xs, Ys).","instances":["add_each_1(A, B) :- gen(+, 1, A, B).","times_each_2(A, B) :- gen(*, 2, A, B)."],"originals":["add_each_1([], []).\nadd_each_1([X|Xs], [Y|Ys]) :- Y is X + 1, add_each_1(Xs, Ys).","times_each_2([], []).\ntimes_each_2([X|Xs], [Y|Ys]) :- Y is X * 2, times_each_2(Xs, Ys)."]}}
+{"n":17,"name":"analyse","input":["loop(X) :- loop(X)."],"output":{"ok":true,"kinds":["base","loop"],"next":"base"}}
+{"n":18,"name":"typeOf","input":[[[1],[2,3]]],"output":"list(list(int))"}
+{"n":19,"name":"join","input":["any","atom"],"output":"atom"}
+{"n":20,"name":"lemma","input":["counting"],"output":"count"}
+{"n":21,"name":"digest","input":["smallest number"],"output":{"name":"smallest","numbers":[],"dataType":"int","leads":["minimum/2","count/2"]}}
+{"n":22,"name":"synthesise","input":[["count the odd numbers",[[[1,2,3],2],[[2,4],0],[[],0]]],"recursion"],"output":{"found":true,"name":"count_odd","chain":["keep:odd","count:null"],"program":"% count_odd(+In, -Out): count the odd numbers\n% keeps each number that is odd, then counts how many things are in the list.\ncount_odd(In, Out) :-\n    keep_odd(In, A),\n    count(A, Out).\n\nkeep_odd([], []).\nkeep_odd([X|Xs], R) :- ( X mod 2 =:= 1 -> R = [X|R0] ; R = R0 ), keep_odd(Xs, R0).\n\ncount([], 0).\ncount([_|Xs], N) :- count(Xs, N0), N is N0 + 1.\n","examples":[[[1,2,3],2],[[2,4],0],[[],0]]}}
+{"n":23,"name":"predict","input":[[{"kind":"lead","context":"keep:even","choice":"no"}],"lead","sum:null"],"output":null}
+{"n":24,"name":"skip","input":[[{"kind":"lead","context":"","choice":"yes"},{"kind":"lead","context":"","choice":"recursion"},{"kind":"methodology","context":"","choice":"recursion"}],"methodology","",true],"output":null}
+{"n":25,"name":"remember","input":[[{"kind":"methodology","context":"keep:even","choice":"builtin"}],{"kind":"lead","context":"","choice":"yes"}],"output":2}
+{"n":26,"name":"decide","input":[{"lastInput":30000,"lastResolved":22000,"lastSpoke":0,"problem":"an example fails","thoughts":["tea","logic"],"turn":6,"concentrating":false},38000],"output":{"act":"fix","text":"Shall we look at this? an example fails"}}
+{"n":27,"name":"answer","input":["jsprolog",0,true],"output":{"step":1,"done":1,"wrong":0}}
+{"n":28,"name":"band","input":[6],"output":"middle"}
+{"n":29,"name":"progress","input":[12],"output":{"done":12,"total":22,"fraction":0.545455}}
+{"n":30,"name":"induce","input":[["a","aa","aaa"]],"output":{"kind":"repeat","prefix":"a","unit":"a","suffix":"","min":0,"dcg":"s --> \"a\", units.\nunits --> [].\nunits --> \"a\", units."}}
+{"n":31,"name":"accepts","input":[["yes","no","maybe"],""],"output":false}
+{"n":32,"name":"meltdown","input":[["set","sort"]],"output":{"found":true,"rule":"sort-sort","after":["set:null"],"prolog":null,"ok":true}}
+{"n":33,"name":"abstract","input":[["addeach:2","addeach:5"]],"output":{"ok":true,"from":["add_each_2","add_each_5"],"params":[["P","2","5"]],"general":"gen(P, [], []).\ngen(P, [X|Xs], [Y|Ys]) :- Y is X + P, gen(P, Xs, Ys).","instances":["add_each_2(A, B) :- gen(2, A, B).","add_each_5(A, B) :- gen(5, A, B)."],"originals":["add_each_2([], []).\nadd_each_2([X|Xs], [Y|Ys]) :- Y is X + 2, add_each_2(Xs, Ys).","add_each_5([], []).\nadd_each_5([X|Xs], [Y|Ys]) :- Y is X + 5, add_each_5(Xs, Ys)."]}}
+{"n":34,"name":"analyse","input":["q(X) :- r(X), s(Y)."],"output":{"ok":true,"kinds":["singleton","undefined","undefined"],"next":"undefined"}}
+{"n":35,"name":"typeOf","input":[[[1],[2,3]]],"output":"list(list(int))"}
+{"n":36,"name":"join","input":["number","any"],"output":"number"}
+{"n":37,"name":"lemma","input":["squares"],"output":"square"}
+{"n":38,"name":"digest","input":["add 3 to each number"],"output":{"name":"add","numbers":[3],"dataType":"int","leads":["sum/2","add_each_3/2","running/2","plus_3/2","times_each_3/2","square_each/2","count/2"]}}
+{"n":39,"name":"synthesise","input":[["how many different numbers",[[[1,1,2,3,3],3],[[5],1],[[],0]]],"foldl"],"output":{"found":true,"name":"different","chain":["set:null","count:null"],"program":"% different(+In, -Out): how many different numbers\n% puts the numbers in order and takes out repeats, then counts how many things are in the list.\ndifferent(In, Out) :-\n    set(In, A),\n    count(A, Out).\n\nset(L, S) :- sort(L, S).\n\ncount(L, N) :- length(L, N).\n","examples":[[[1,1,2,3,3],3],[[5],1],[[],0]]}}
+{"n":40,"name":"predict","input":[[{"kind":"lead","context":"","choice":"yes"},{"kind":"lead","context":"keep:even","choice":"no"},{"kind":"lead","context":"","choice":"builtin"},{"kind":"lead","context":"keep:even","choice":"recursion"},{"kind":"lead","context":"keep:even","choice":"no"},{"kind":"lead","context":"sum:null","choice":"builtin"}],"methodology",""],"output":null}
+{"n":41,"name":"skip","input":[[{"kind":"methodology","context":"sum:null","choice":"yes"}],"lead","",false],"output":null}
+{"n":42,"name":"remember","input":[[{"kind":"lead","context":"sum:null","choice":"recursion"},{"kind":"lead","context":"keep:even","choice":"recursion"},{"kind":"methodology","context":"sum:null","choice":"yes"},{"kind":"lead","context":"keep:even","choice":"yes"}],{"kind":"","context":"","choice":""}],"output":4}
+{"n":43,"name":"decide","input":[{"lastInput":9000,"lastResolved":28000,"lastSpoke":3000,"problem":"an example fails","thoughts":[],"turn":0,"concentrating":false},23000],"output":{"act":"quiet","text":""}}
+{"n":44,"name":"answer","input":["newlang",0,true],"output":{"step":1,"done":1,"wrong":0}}
+{"n":45,"name":"band","input":[16],"output":"uni"}
+{"n":46,"name":"progress","input":[22],"output":{"done":22,"total":22,"fraction":1}}
+{"n":47,"name":"induce","input":[["ab","abab","ababab"]],"output":{"kind":"repeat","prefix":"ab","unit":"ab","suffix":"","min":0,"dcg":"s --> \"ab\", units.\nunits --> [].\nunits --> \"ab\", units."}}
+{"n":48,"name":"accepts","input":[["0","01","011","0111"],"abababab"],"output":false}
+{"n":49,"name":"meltdown","input":[["squareeach","sum"]],"output":{"found":true,"rule":"square-sum","after":null,"prolog":"sum_squares(L, S) :- foldl([X, A0, A]>>(A is A0 + X * X), L, 0, S).","ok":true}}
+{"n":50,"name":"abstract","input":[["keep:positive","drop:negative"]],"output":{"ok":false,"why":"Clause 2 of each is too different (more than a number or an operation apart).","originals":["keep_positive([], []).\nkeep_positive([X|Xs], R) :- ( X > 0 -> R = [X|R0] ; R = R0 ), keep_positive(Xs, R0).","drop_negative([], []).\ndrop_negative([X|Xs], R) :- ( X < 0 -> R = R0 ; R = [X|R0] ), drop_negative(Xs, R0)."]}}
+{"n":51,"name":"analyse","input":["total([], 0).\ntotal([X|Xs], S) :- total(Xs, S0), S is S0 + X."],"output":{"ok":true,"kinds":["pattern"],"next":"pattern"}}
+{"n":52,"name":"typeOf","input":[[]],"output":"list(any)"}
+{"n":53,"name":"join","input":["list(any)","int"],"output":null}
+{"n":54,"name":"lemma","input":["squares"],"output":"square"}
+{"n":55,"name":"digest","input":["remove the negative numbers"],"output":{"name":"remove_negative","numbers":[],"dataType":"list(int)","leads":["rest/2","drop_negative/2","dedup/2"]}}
+{"n":56,"name":"synthesise","input":[["the last number",[[[1,2,3],3],[[7],7]]],"builtin"],"output":{"found":true,"name":"my_last","chain":["last:null"],"program":"% my_last(+In, -Out): the last number\n% gives the last thing in the list.\nmy_last(In, Out) :-\n    last_one(In, Out).\n\nlast_one(L, X) :- last(L, X).\n","examples":[[[1,2,3],3],[[7],7]]}}
+{"n":57,"name":"predict","input":[[],"lead","sum:null"],"output":null}
+{"n":58,"name":"skip","input":[[{"kind":"lead","context":"sum:null","choice":"recursion"}],"lead","",true],"output":null}
+{"n":59,"name":"remember","input":[[{"kind":"methodology","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"keep:even","choice":"builtin"}],{"kind":"lead","context":"x","choice":"no"}],"output":3}
+{"n":60,"name":"decide","input":[{"lastInput":0,"lastResolved":0,"lastSpoke":0,"problem":null,"thoughts":["tea","logic"],"turn":0,"concentrating":true},34000],"output":{"act":"quiet","text":""}}
+{"n":61,"name":"answer","input":["basic",0,true],"output":{"step":1,"done":1,"wrong":0}}
+{"n":62,"name":"band","input":[9],"output":"older"}
+{"n":63,"name":"progress","input":[15],"output":{"done":15,"total":22,"fraction":0.681818}}
+{"n":64,"name":"induce","input":[["0","01","011","0111"]],"output":{"kind":"repeat","prefix":"0","unit":"1","suffix":"","min":0,"dcg":"s --> \"0\", units.\nunits --> [].\nunits --> \"1\", units."}}
+{"n":65,"name":"accepts","input":[["cat","dog"],"01111"],"output":false}
+{"n":66,"name":"meltdown","input":[["sort","first"]],"output":{"found":true,"rule":"sort-first","after":["minimum:null"],"prolog":null,"ok":true}}
+{"n":67,"name":"abstract","input":[["addeach:1","timeseach:2"]],"output":{"ok":true,"from":["add_each_1","times_each_2"],"params":[["Op","+","*"],["P","1","2"]],"general":"gen(Op, P, [], []).\ngen(Op, P, [X|Xs], [Y|Ys]) :- (E1 =.. [Op, X, P], Y is E1), gen(Op, P, Xs, Ys).","instances":["add_each_1(A, B) :- gen(+, 1, A, B).","times_each_2(A, B) :- gen(*, 2, A, B)."],"originals":["add_each_1([], []).\nadd_each_1([X|Xs], [Y|Ys]) :- Y is X + 1, add_each_1(Xs, Ys).","times_each_2([], []).\ntimes_each_2([X|Xs], [Y|Ys]) :- Y is X * 2, times_each_2(Xs, Ys)."]}}
+{"n":68,"name":"analyse","input":["q(X) :- r(X), s(Y)."],"output":{"ok":true,"kinds":["singleton","undefined","undefined"],"next":"undefined"}}
+{"n":69,"name":"typeOf","input":[-2],"output":"int"}
+{"n":70,"name":"join","input":["list(float)","list(any)"],"output":"list(float)"}
+{"n":71,"name":"lemma","input":["counting"],"output":"count"}
+{"n":72,"name":"digest","input":["reverse the list"],"output":{"name":"reverse","numbers":[],"dataType":null,"leads":["rev/2","backwards/2"]}}
+{"n":73,"name":"synthesise","input":[["join the lists",[[[[1],[2,3]],[1,2,3]],[[[],[4]],[4]],[[],[]]]],"recursion"],"output":{"found":true,"name":"my_join","chain":["join:null"],"program":"% my_join(+In, -Out): join the lists\n% puts lists end to end to make one list.\nmy_join(In, Out) :-\n    join(In, Out).\n\njoin([], []).\njoin([L|Ls], R) :- join(Ls, R0), append(L, R0, R).\n","examples":[[[[1],[2,3]],[1,2,3]],[[[],[4]],[4]],[[],[]]]}}
+{"n":74,"name":"predict","input":[[{"kind":"methodology","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"sum:null","choice":"no"},{"kind":"methodology","context":"sum:null","choice":"yes"},{"kind":"lead","context":"keep:even","choice":"recursion"},{"kind":"lead","context":"sum:null","choice":"recursion"}],"lead",""],"output":null}
+{"n":75,"name":"skip","input":[[{"kind":"lead","context":"","choice":"no"},{"kind":"lead","context":"keep:even","choice":"recursion"},{"kind":"lead","context":"","choice":"recursion"},{"kind":"lead","context":"keep:even","choice":"builtin"},{"kind":"lead","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"sum:null","choice":"no"}],"methodology","sum:null",true],"output":null}
+{"n":76,"name":"remember","input":[[{"kind":"lead","context":"keep:even","choice":"recursion"},{"kind":"lead","context":"","choice":"builtin"},{"kind":"lead","context":"keep:even","choice":"recursion"},{"kind":"methodology","context":"sum:null","choice":"yes"},{"kind":"methodology","context":"sum:null","choice":"builtin"},{"kind":"lead","context":"","choice":"builtin"}],{"kind":"","context":"","choice":"yes"}],"output":6}
+{"n":77,"name":"decide","input":[{"lastInput":23000,"lastResolved":7000,"lastSpoke":9000,"problem":null,"thoughts":["tea","logic"],"turn":3,"concentrating":false},15000],"output":{"act":"quiet","text":""}}
+{"n":78,"name":"answer","input":["interpreter",3,false],"output":{"step":3,"done":3,"wrong":0}}
+{"n":79,"name":"band","input":[7],"output":"middle"}
+{"n":80,"name":"progress","input":[2],"output":{"done":2,"total":22,"fraction":0.090909}}
+{"n":81,"name":"induce","input":[["cat","dog"]],"output":{"kind":"choice","prefix":null,"unit":null,"suffix":null,"min":null,"dcg":"s --> \"cat\".\ns --> \"dog\"."}}
+{"n":82,"name":"accepts","input":[["yes","no","maybe"],"aaaa"],"output":false}
+{"n":83,"name":"meltdown","input":[["set","sort"]],"output":{"found":true,"rule":"sort-sort","after":["set:null"],"prolog":null,"ok":true}}
+{"n":84,"name":"abstract","input":[["addeach:2","addeach:5"]],"output":{"ok":true,"from":["add_each_2","add_each_5"],"params":[["P","2","5"]],"general":"gen(P, [], []).\ngen(P, [X|Xs], [Y|Ys]) :- Y is X + P, gen(P, Xs, Ys).","instances":["add_each_2(A, B) :- gen(2, A, B).","add_each_5(A, B) :- gen(5, A, B)."],"originals":["add_each_2([], []).\nadd_each_2([X|Xs], [Y|Ys]) :- Y is X + 2, add_each_2(Xs, Ys).","add_each_5([], []).\nadd_each_5([X|Xs], [Y|Ys]) :- Y is X + 5, add_each_5(Xs, Ys)."]}}
+{"n":85,"name":"analyse","input":["total([], 0).\ntotal([X|Xs], S) :- total(Xs, S0), S is S0 + X."],"output":{"ok":true,"kinds":["pattern"],"next":"pattern"}}
+{"n":86,"name":"typeOf","input":[-2],"output":"int"}
+{"n":87,"name":"join","input":["list(int)","list(int)"],"output":"list(int)"}
+{"n":88,"name":"lemma","input":["ss"],"output":"ss"}
+{"n":89,"name":"digest","input":["total of the numbers"],"output":{"name":"total","numbers":[],"dataType":"list(int)","leads":["sum/2","running/2"]}}
+{"n":90,"name":"synthesise","input":[["biggest even number",[[[1,8,3,4,9],8],[[2,6,5],6]]],"foldl"],"output":{"found":true,"name":"biggest_even","chain":["keep:even","maximum:null"],"program":"% biggest_even(+In, -Out): biggest even number\n% keeps each number that is even, then finds the biggest number.\nbiggest_even(In, Out) :-\n    keep_even(In, A),\n    maximum(A, Out).\n\nkeep_even(L, R) :- include([X]>>(X mod 2 =:= 0), L, R).\n\nmaximum(L, M) :- max_list(L, M).\n","examples":[[[1,8,3,4,9],8],[[2,6,5],6]]}}
+{"n":91,"name":"predict","input":[[],"lead",""],"output":null}
+{"n":92,"name":"skip","input":[[],"methodology","",true],"output":null}
+{"n":93,"name":"remember","input":[[{"kind":"methodology","context":"keep:even","choice":"no"},{"kind":"lead","context":"sum:null","choice":"recursion"}],{"kind":"lead","context":"x","choice":""}],"output":2}
+{"n":94,"name":"decide","input":[{"lastInput":15000,"lastResolved":1000,"lastSpoke":6000,"problem":null,"thoughts":["tea","logic"],"turn":4,"concentrating":false},30000],"output":{"act":"quiet","text":""}}
+{"n":95,"name":"answer","input":["jsprolog",0,true],"output":{"step":1,"done":1,"wrong":0}}
+{"n":96,"name":"band","input":[5],"output":"middle"}
+{"n":97,"name":"progress","input":[6],"output":{"done":6,"total":22,"fraction":0.272727}}
+{"n":98,"name":"induce","input":[["abcabc","abcabcabc"]],"output":{"kind":"repeat","prefix":"abcabc","unit":"abc","suffix":"","min":0,"dcg":"s --> \"abcabc\", units.\nunits --> [].\nunits --> \"abc\", units."}}
+{"n":99,"name":"accepts","input":[["hi"],"ab"],"output":false}
+{"n":100,"name":"meltdown","input":[["squareeach","sum"]],"output":{"found":true,"rule":"square-sum","after":null,"prolog":"sum_squares(L, S) :- foldl([X, A0, A]>>(A is A0 + X * X), L, 0, S).","ok":true}}
+{"n":101,"name":"abstract","input":[["keep:even","keep:odd"]],"output":{"ok":true,"from":["keep_even","keep_odd"],"params":[["P","0","1"]],"general":"gen(P, [], []).\ngen(P, [X|Xs], R) :- (X mod 2 =:= P -> R = [X|R0] ; R = R0), gen(P, Xs, R0).","instances":["keep_even(A, B) :- gen(0, A, B).","keep_odd(A, B) :- gen(1, A, B)."],"originals":["keep_even([], []).\nkeep_even([X|Xs], R) :- ( X mod 2 =:= 0 -> R = [X|R0] ; R = R0 ), keep_even(Xs, R0).","keep_odd([], []).\nkeep_odd([X|Xs], R) :- ( X mod 2 =:= 1 -> R = [X|R0] ; R = R0 ), keep_odd(Xs, R0)."]}}
+{"n":102,"name":"analyse","input":["oops(X :- ."],"output":{"ok":false,"kinds":["read"],"next":"read"}}
+{"n":103,"name":"typeOf","input":[[1,-3,5]],"output":"list(int)"}
+{"n":104,"name":"join","input":["float","atom"],"output":null}
+{"n":105,"name":"lemma","input":["numbers"],"output":"number"}
+{"n":106,"name":"digest","input":["reverse the list"],"output":{"name":"reverse","numbers":[],"dataType":null,"leads":["rev/2","backwards/2"]}}
+{"n":107,"name":"synthesise","input":[["biggest even number",[[[1,8,3,4,9],8],[[2,6,5],6]]],"builtin"],"output":{"found":true,"name":"biggest_even","chain":["keep:even","maximum:null"],"program":"% biggest_even(+In, -Out): biggest even number\n% keeps each number that is even, then finds the biggest number.\nbiggest_even(In, Out) :-\n    keep_even(In, A),\n    maximum(A, Out).\n\nkeep_even(L, R) :- include([X]>>(X mod 2 =:= 0), L, R).\n\nmaximum(L, M) :- max_list(L, M).\n","examples":[[[1,8,3,4,9],8],[[2,6,5],6]]}}
+{"n":108,"name":"predict","input":[[{"kind":"lead","context":"sum:null","choice":"recursion"},{"kind":"lead","context":"sum:null","choice":"yes"},{"kind":"methodology","context":"sum:null","choice":"recursion"},{"kind":"lead","context":"","choice":"yes"},{"kind":"methodology","context":"keep:even","choice":"builtin"},{"kind":"lead","context":"keep:even","choice":"no"}],"lead",""],"output":{"choice":"yes","count":1,"share":1}}
+{"n":109,"name":"skip","input":[[{"kind":"lead","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"sum:null","choice":"yes"},{"kind":"lead","context":"","choice":"recursion"},{"kind":"lead","context":"sum:null","choice":"no"},{"kind":"lead","context":"sum:null","choice":"builtin"}],"methodology","",false],"output":null}
+{"n":110,"name":"remember","input":[[{"kind":"lead","context":"keep:even","choice":"recursion"},{"kind":"lead","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"keep:even","choice":"yes"}],{"kind":"","context":"","choice":"no"}],"output":3}
+{"n":111,"name":"decide","input":[{"lastInput":4000,"lastResolved":10000,"lastSpoke":0,"problem":null,"thoughts":[],"turn":3,"concentrating":false},35000],"output":{"act":"idea","text":"Is there a smaller example that still shows it?"}}
+{"n":112,"name":"answer","input":["interpreter",3,true],"output":{"step":3,"done":3,"wrong":0}}
+{"n":113,"name":"band","input":[16],"output":"uni"}
+{"n":114,"name":"progress","input":[6],"output":{"done":6,"total":22,"fraction":0.272727}}
+{"n":115,"name":"induce","input":[["ab","abab","ababab"]],"output":{"kind":"repeat","prefix":"ab","unit":"ab","suffix":"","min":0,"dcg":"s --> \"ab\", units.\nunits --> [].\nunits --> \"ab\", units."}}
+{"n":116,"name":"accepts","input":[["cat","dog"],"dogs"],"output":false}
+{"n":117,"name":"meltdown","input":[["squareeach","sum"]],"output":{"found":true,"rule":"square-sum","after":null,"prolog":"sum_squares(L, S) :- foldl([X, A0, A]>>(A is A0 + X * X), L, 0, S).","ok":true}}
+{"n":118,"name":"abstract","input":[["keep:positive","drop:negative"]],"output":{"ok":false,"why":"Clause 2 of each is too different (more than a number or an operation apart).","originals":["keep_positive([], []).\nkeep_positive([X|Xs], R) :- ( X > 0 -> R = [X|R0] ; R = R0 ), keep_positive(Xs, R0).","drop_negative([], []).\ndrop_negative([X|Xs], R) :- ( X < 0 -> R = R0 ; R = [X|R0] ), drop_negative(Xs, R0)."]}}
+{"n":119,"name":"analyse","input":["loop(X) :- loop(X)."],"output":{"ok":true,"kinds":["base","loop"],"next":"base"}}
+{"n":120,"name":"typeOf","input":[[[1],[2,3]]],"output":"list(list(int))"}
+{"n":121,"name":"join","input":["list(atom)","list(any)"],"output":"list(atom)"}
+{"n":122,"name":"lemma","input":["counting"],"output":"count"}
+{"n":123,"name":"digest","input":["biggest even number"],"output":{"name":"biggest_even","numbers":[],"dataType":"int","leads":["maximum/2","keep_even/2","count/2"]}}
+{"n":124,"name":"synthesise","input":[["how many different numbers",[[[1,1,2,3,3],3],[[5],1],[[],0]]],"recursion"],"output":{"found":true,"name":"different","chain":["set:null","count:null"],"program":"% different(+In, -Out): how many different numbers\n% puts the numbers in order and takes out repeats, then counts how many things are in the list.\ndifferent(In, Out) :-\n    set(In, A),\n    count(A, Out).\n\nset(L, S) :- sort(L, S).\n\ncount([], 0).\ncount([_|Xs], N) :- count(Xs, N0), N is N0 + 1.\n","examples":[[[1,1,2,3,3],3],[[5],1],[[],0]]}}
+{"n":125,"name":"predict","input":[[{"kind":"lead","context":"","choice":"no"},{"kind":"lead","context":"","choice":"recursion"},{"kind":"lead","context":"","choice":"recursion"}],"methodology","keep:even"],"output":null}
+{"n":126,"name":"skip","input":[[{"kind":"lead","context":"sum:null","choice":"recursion"},{"kind":"methodology","context":"","choice":"recursion"},{"kind":"lead","context":"","choice":"builtin"},{"kind":"methodology","context":"sum:null","choice":"builtin"},{"kind":"methodology","context":"keep:even","choice":"builtin"}],"methodology","",true],"output":null}
+{"n":127,"name":"remember","input":[[{"kind":"methodology","context":"keep:even","choice":"yes"}],{"kind":"lead","context":"x","choice":""}],"output":1}
+{"n":128,"name":"decide","input":[{"lastInput":23000,"lastResolved":19000,"lastSpoke":0,"problem":"an example fails","thoughts":["tea","logic"],"turn":0,"concentrating":false},12000],"output":{"act":"quiet","text":""}}
+{"n":129,"name":"answer","input":["mix",0,true],"output":{"step":1,"done":1,"wrong":0}}
+{"n":130,"name":"band","input":[0],"output":"middle"}
+{"n":131,"name":"progress","input":[14],"output":{"done":14,"total":22,"fraction":0.636364}}
+{"n":132,"name":"induce","input":[["abcabc","abcabcabc"]],"output":{"kind":"repeat","prefix":"abcabc","unit":"abc","suffix":"","min":0,"dcg":"s --> \"abcabc\", units.\nunits --> [].\nunits --> \"abc\", units."}}
+{"n":133,"name":"accepts","input":[["0","01","011","0111"],"maybe"],"output":false}
+{"n":134,"name":"meltdown","input":[["sort","first"]],"output":{"found":true,"rule":"sort-first","after":["minimum:null"],"prolog":null,"ok":true}}
+{"n":135,"name":"abstract","input":[["addeach:2","addeach:5"]],"output":{"ok":true,"from":["add_each_2","add_each_5"],"params":[["P","2","5"]],"general":"gen(P, [], []).\ngen(P, [X|Xs], [Y|Ys]) :- Y is X + P, gen(P, Xs, Ys).","instances":["add_each_2(A, B) :- gen(2, A, B).","add_each_5(A, B) :- gen(5, A, B)."],"originals":["add_each_2([], []).\nadd_each_2([X|Xs], [Y|Ys]) :- Y is X + 2, add_each_2(Xs, Ys).","add_each_5([], []).\nadd_each_5([X|Xs], [Y|Ys]) :- Y is X + 5, add_each_5(Xs, Ys)."]}}
+{"n":136,"name":"analyse","input":["q(X) :- r(X), s(Y)."],"output":{"ok":true,"kinds":["singleton","undefined","undefined"],"next":"undefined"}}
+{"n":137,"name":"typeOf","input":[["a","b"]],"output":"list(atom)"}
+{"n":138,"name":"join","input":["number","int"],"output":"number"}
+{"n":139,"name":"lemma","input":["running"],"output":"runn"}
+{"n":140,"name":"digest","input":["add 3 to each number"],"output":{"name":"add","numbers":[3],"dataType":"int","leads":["sum/2","add_each_3/2","running/2","plus_3/2","times_each_3/2","square_each/2","count/2"]}}
+{"n":141,"name":"synthesise","input":[["running totals",[[[1,2,3],[1,3,6]],[[5],[5]],[[],[]]]],"foldl"],"output":{"found":true,"name":"runn_total","chain":["running:null"],"program":"% runn_total(+In, -Out): running totals\n% gives the total so far at each place.\nrunn_total(In, Out) :-\n    running(In, Out).\n\nrunning(L, R) :- running(L, 0, R).\nrunning([], _, []).\nrunning([X|Xs], A0, [A|R]) :- A is A0 + X, running(Xs, A, R).\n","examples":[[[1,2,3],[1,3,6]],[[5],[5]],[[],[]]]}}
+{"n":142,"name":"predict","input":[[{"kind":"lead","context":"keep:even","choice":"builtin"},{"kind":"lead","context":"keep:even","choice":"yes"}],"methodology","sum:null"],"output":null}
+{"n":143,"name":"skip","input":[[{"kind":"lead","context":"","choice":"no"}],"methodology","",false],"output":null}
+{"n":144,"name":"remember","input":[[{"kind":"lead","context":"sum:null","choice":"yes"},{"kind":"lead","context":"","choice":"recursion"}],{"kind":"","context":"x","choice":"yes"}],"output":2}
+{"n":145,"name":"decide","input":[{"lastInput":24000,"lastResolved":7000,"lastSpoke":0,"problem":"an example fails","thoughts":["tea","logic"],"turn":0,"concentrating":false},39000],"output":{"act":"fix","text":"Shall we look at this? an example fails"}}
+{"n":146,"name":"answer","input":["interpreter",1,true],"output":{"step":2,"done":2,"wrong":0}}
+{"n":147,"name":"band","input":[7],"output":"middle"}
+{"n":148,"name":"progress","input":[8],"output":{"done":8,"total":22,"fraction":0.363636}}
+{"n":149,"name":"induce","input":[["hi"]],"output":{"kind":"one","prefix":null,"unit":null,"suffix":null,"min":null,"dcg":"s --> \"hi\"."}}
+{"n":150,"name":"accepts","input":[["cat","dog"],"01111"],"output":false}
+{"n":151,"name":"meltdown","input":[["addeach:1","addeach:2"]],"output":{"found":true,"rule":"add-add","after":["addeach:3"],"prolog":null,"ok":true}}
+{"n":152,"name":"abstract","input":[["count","sum"]],"output":{"ok":false,"why":"Clause 2 of each is too different (more than a number or an operation apart).","originals":["count([], 0).\ncount([_|Xs], N) :- count(Xs, N0), N is N0 + 1.","sum([], 0).\nsum([X|Xs], S) :- sum(Xs, S0), S is S0 + X."]}}
+{"n":153,"name":"analyse","input":["len([], 0).\nlen([_|T], N) :- len(T, N0), N is N0 + 1."],"output":{"ok":true,"kinds":[],"next":"examples"}}
+{"n":154,"name":"typeOf","input":[[1,2]],"output":"list(int)"}
+{"n":155,"name":"join","input":["atom","any"],"output":"atom"}
+{"n":156,"name":"lemma","input":["running"],"output":"runn"}
+{"n":157,"name":"digest","input":["join the lists"],"output":{"name":"join","numbers":[],"dataType":"list(list(int))","leads":["join/2"]}}
+{"n":158,"name":"synthesise","input":[["add 3 to each number",[[[1,2],[4,5]],[[0],[3]],[[],[]]]],"foldl"],"output":{"found":true,"name":"add","chain":["addeach:3"],"program":"% add(+In, -Out): add 3 to each number\n% adds 3 to each number.\nadd(In, Out) :-\n    add_each_3(In, Out).\n\nadd_each_3(L, R) :- maplist([X, Y]>>(Y is X + 3), L, R).\n","examples":[[[1,2],[4,5]],[[0],[3]],[[],[]]]}}
+{"n":159,"name":"predict","input":[[{"kind":"methodology","context":"","choice":"builtin"},{"kind":"lead","context":"sum:null","choice":"yes"},{"kind":"methodology","context":"","choice":"recursion"},{"kind":"lead","context":"","choice":"no"},{"kind":"lead","context":"","choice":"recursion"}],"lead",""],"output":{"choice":"recursion","count":2,"share":0.5}}
+{"n":160,"name":"skip","input":[[{"kind":"methodology","context":"keep:even","choice":"no"}],"lead","sum:null",true],"output":null}
+{"n":161,"name":"remember","input":[[],{"kind":"","context":"","choice":"yes"}],"output":0}
+{"n":162,"name":"decide","input":[{"lastInput":16000,"lastResolved":18000,"lastSpoke":11000,"problem":null,"thoughts":[],"turn":2,"concentrating":false},35000],"output":{"act":"sing","text":"♪ immersion, immersion, algorithm and immersion ♪"}}
+{"n":163,"name":"answer","input":["mix",1,false],"output":{"step":1,"done":1,"wrong":1}}
+{"n":164,"name":"band","input":[12],"output":"older"}
+{"n":165,"name":"progress","input":[17],"output":{"done":17,"total":22,"fraction":0.772727}}
+{"n":166,"name":"induce","input":[["a","aa","aaa"]],"output":{"kind":"repeat","prefix":"a","unit":"a","suffix":"","min":0,"dcg":"s --> \"a\", units.\nunits --> [].\nunits --> \"a\", units."}}
+{"n":167,"name":"accepts","input":[["yes","no","maybe"],"01111"],"output":false}
+{"n":168,"name":"meltdown","input":[["addeach:3","sum"]],"output":{"found":true,"rule":"add-sum","after":null,"prolog":"sum_plus(L, S) :- sum_list(L, S0), length(L, N), S is S0 + N * 3.","ok":true}}
+{"n":169,"name":"abstract","input":[["addeach:1","timeseach:2"]],"output":{"ok":true,"from":["add_each_1","times_each_2"],"params":[["Op","+","*"],["P","1","2"]],"general":"gen(Op, P, [], []).\ngen(Op, P, [X|Xs], [Y|Ys]) :- (E1 =.. [Op, X, P], Y is E1), gen(Op, P, Xs, Ys).","instances":["add_each_1(A, B) :- gen(+, 1, A, B).","times_each_2(A, B) :- gen(*, 2, A, B)."],"originals":["add_each_1([], []).\nadd_each_1([X|Xs], [Y|Ys]) :- Y is X + 1, add_each_1(Xs, Ys).","times_each_2([], []).\ntimes_each_2([X|Xs], [Y|Ys]) :- Y is X * 2, times_each_2(Xs, Ys)."]}}
+{"n":170,"name":"analyse","input":["oops(X :- ."],"output":{"ok":false,"kinds":["read"],"next":"read"}}
+{"n":171,"name":"typeOf","input":[[2.5,1]],"output":"list(number)"}
+{"n":172,"name":"join","input":["list(atom)","int"],"output":null}
+{"n":173,"name":"lemma","input":["running"],"output":"runn"}
+{"n":174,"name":"digest","input":["sort the numbers"],"output":{"name":"sort","numbers":[],"dataType":"list(int)","leads":["sorted/2","set/2"]}}
+{"n":175,"name":"synthesise","input":[["keep the positive numbers",[[[1,-2,3],[1,3]],[[-1],[]],[[],[]]]],"recursion"],"output":{"found":true,"name":"my_keep_positive","chain":["keep:positive"],"program":"% my_keep_positive(+In, -Out): keep the positive numbers\n% keeps each number that is more than zero.\nmy_keep_positive(In, Out) :-\n    keep_positive(In, Out).\n\nkeep_positive([], []).\nkeep_positive([X|Xs], R) :- ( X > 0 -> R = [X|R0] ; R = R0 ), keep_positive(Xs, R0).\n","examples":[[[1,-2,3],[1,3]],[[-1],[]],[[],[]]]}}
+{"n":176,"name":"predict","input":[[{"kind":"lead","context":"","choice":"recursion"},{"kind":"methodology","context":"sum:null","choice":"yes"}],"methodology","sum:null"],"output":{"choice":"yes","count":1,"share":1}}
+{"n":177,"name":"skip","input":[[{"kind":"lead","context":"keep:even","choice":"builtin"},{"kind":"methodology","context":"keep:even","choice":"builtin"},{"kind":"methodology","context":"","choice":"recursion"},{"kind":"lead","context":"keep:even","choice":"recursion"}],"methodology","",true],"output":null}
+{"n":178,"name":"remember","input":[[{"kind":"methodology","context":"","choice":"yes"}],{"kind":"lead","context":"","choice":"yes"}],"output":2}
+{"n":179,"name":"decide","input":[{"lastInput":12000,"lastResolved":19000,"lastSpoke":9000,"problem":null,"thoughts":[],"turn":4,"concentrating":false},23000],"output":{"act":"quiet","text":""}}
+{"n":180,"name":"answer","input":["basic",2,true],"output":{"step":3,"done":3,"wrong":0}}
+{"n":181,"name":"band","input":[6],"output":"middle"}
+{"n":182,"name":"progress","input":[13],"output":{"done":13,"total":22,"fraction":0.590909}}
+{"n":183,"name":"induce","input":[["cat","dog"]],"output":{"kind":"choice","prefix":null,"unit":null,"suffix":null,"min":null,"dcg":"s --> \"cat\".\ns --> \"dog\"."}}
+{"n":184,"name":"accepts","input":[["cat","dog"],"abababab"],"output":false}
+{"n":185,"name":"meltdown","input":[["keep:even","count"]],"output":{"found":true,"rule":"keep-count","after":null,"prolog":"count_even(L, N) :- foldl([X, C0, C]>>( X mod 2 =:= 0 -> C is C0 + 1 ; C = C0 ), L, 0, N).","ok":true}}
+{"n":186,"name":"abstract","input":[["keep:positive","drop:negative"]],"output":{"ok":false,"why":"Clause 2 of each is too different (more than a number or an operation apart).","originals":["keep_positive([], []).\nkeep_positive([X|Xs], R) :- ( X > 0 -> R = [X|R0] ; R = R0 ), keep_positive(Xs, R0).","drop_negative([], []).\ndrop_negative([X|Xs], R) :- ( X < 0 -> R = R0 ; R = [X|R0] ), drop_negative(Xs, R0)."]}}
+{"n":187,"name":"analyse","input":["len([], 0).\nlen([_|T], N) :- len(T, N0), N is N0 + 1."],"output":{"ok":true,"kinds":[],"next":"examples"}}
+{"n":188,"name":"typeOf","input":[-2],"output":"int"}
+{"n":189,"name":"join","input":["number","list(int)"],"output":null}
+{"n":190,"name":"lemma","input":["lists"],"output":"list"}
+{"n":191,"name":"digest","input":["count the even numbers"],"output":{"name":"count_even","numbers":[],"dataType":"list(int)","leads":["count/2","keep_even/2"]}}
+{"n":192,"name":"synthesise","input":[["total of the numbers",[[[1,2,3],6],[[],0],[[-1,1],0]]],"recursion"],"output":{"found":true,"name":"total","chain":["sum:null"],"program":"% total(+In, -Out): total of the numbers\n% adds all the numbers together.\ntotal(In, Out) :-\n    sum(In, Out).\n\nsum([], 0).\nsum([X|Xs], S) :- sum(Xs, S0), S is S0 + X.\n","examples":[[[1,2,3],6],[[],0],[[-1,1],0]]}}
+{"n":193,"name":"predict","input":[[],"methodology",""],"output":null}
+{"n":194,"name":"skip","input":[[],"methodology","sum:null",true],"output":null}
+{"n":195,"name":"remember","input":[[{"kind":"methodology","context":"sum:null","choice":"builtin"}],{"kind":"","context":"","choice":"yes"}],"output":1}
+{"n":196,"name":"decide","input":[{"lastInput":10000,"lastResolved":20000,"lastSpoke":7000,"problem":null,"thoughts":["tea","logic"],"turn":2,"concentrating":false},36000],"output":{"act":"idea","text":"Could one pass do it, with an accumulator?"}}
+{"n":197,"name":"answer","input":["basic",3,false],"output":{"step":3,"done":3,"wrong":1}}
+{"n":198,"name":"band","input":[11],"output":"older"}
+{"n":199,"name":"progress","input":[1],"output":{"done":1,"total":22,"fraction":0.045455}}
+{"n":200,"name":"induce","input":[["abcabc","abcabcabc"]],"output":{"kind":"repeat","prefix":"abcabc","unit":"abc","suffix":"","min":0,"dcg":"s --> \"abcabc\", units.\nunits --> [].\nunits --> \"abc\", units."}}
