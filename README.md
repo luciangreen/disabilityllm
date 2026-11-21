@@ -9,7 +9,9 @@ It has two panes, each labelled, and each folds away to its label:
 
 The two progress bars along the bottom show this section and your progress overall. **Summary**, **Fast forward** and **Start again** work on the section you are in.
 
-A talking character asks the questions aloud, and you can answer by tapping or by speaking. It is the LucianOS character: your photo with its eyes and mouth placed by you, and a voice you choose. A companion (a tiger cub, or a child in a star costume; tap it to change) dances in the corner. It stays quiet while you concentrate. After a pause that follows something you finished, it sings Grammar Logic key terms, lists your recent thoughts, or suggests an idea. If something is left to fix, it helps with that first.
+There is one chatbot. It asks the questions aloud, and you can answer by tapping or by speaking. It is the LucianOS character: your photo with its eyes and mouth placed by you, and a voice you choose. Inside the LucianOS desktop it is the desktop's own chatbot, so Disability LLM doesn't draw a second one: what you say to it goes to Disability LLM first while its window is in front.
+
+The companion is a character the chatbot becomes for a while. Choose it under **Companion**: a tiger cub, or a child in a star costume. When it has a side idea, the chatbot takes on the companion's face and name, dances while it speaks, and goes back to being itself 3 seconds later, or as soon as you talk to it. It stays quiet while you concentrate, and while you are in another window. After a pause that follows something you finished, it sings Grammar Logic key terms, lists your recent thoughts, or suggests an idea. If something is left to fix, it helps with that first, with a button to fix it.
 
 ## Install
 

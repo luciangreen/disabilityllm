@@ -39,7 +39,8 @@ export function mountApplaud(ctx) {
       ...problems.filter((n) => n !== r.next).map((n) => note(n, 'problem')),
       ...patterns.map((n) => note(n, 'good')),
       r.preds.length ? el('div', { class: 'ap-note' }, el('span', {}, `Predicates: ${r.preds.map((p) => `${p.key} (${p.clauses} clause${p.clauses > 1 ? 's' : ''}${p.recursive ? `: ${p.base} base, ${p.recursive} recursive` : ''})`).join('; ')}.`)) : null].filter(Boolean));
-    ctx.companion.problem(problems[0]?.text ?? null);
+    const first = problems[0];
+    ctx.companion.problem(first?.text ?? null, first?.fix ? { label: first.fix.label, run: () => { insert(first.fix.insert); check(); } } : null);
     if (!quiet && !problems.length && r.preds.length) ctx.companion.resolved();
     return r;
   }
