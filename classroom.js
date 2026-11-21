@@ -43,7 +43,10 @@ export function mountClassroom(ctx) {
   const predicted = (kind, context) => skip(store.choices(), kind, context, ctx.predicting());
 
   // spoken (or typed to the character) answers to the question on screen
-  ctx.onSpoken(async (t) => {
+  // inside the desktop, its own commands (open, go to, ...) are left to it, not taken as answers
+  const DESKTOP = new Set(['open', 'goto', 'home', 'up', 'workflows', 'music', 'comment', 'brainstorm', 'breason', 'gl']);
+  ctx.onSpoken(async (t, cmd) => {
+    if (ctx.inDesktop?.() && DESKTOP.has(cmd?.intent)) return null;
     if (/^(next|go on|carry on|continue)$/.test(t)) { nextFn?.(); return 'Going on.'; }
     if (/^summary$/.test(t)) { summaryFn?.(); return 'Here is the summary.'; }
     if (/^fast forward$/.test(t)) { ffFn?.(); return 'Fast forward.'; }

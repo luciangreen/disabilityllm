@@ -15,6 +15,7 @@
     <span class="dl-sub quiet">algorithms, not a language model</span>
     <span class="dl-spacer"></span>
     <label class="dl-year">Explain at <select id="year" aria-label="Year level for explanations"></select></label>
+    <label class="dl-year" title="Who the chatbot becomes when it suggests side ideas">Companion <select id="buddyPick" aria-label="Companion"><option value="tiger">Tiger cub</option><option value="child">Star child</option></select></label>
     <label class="dl-check" title="Skip questions you have answered the same way before (each skip is listed, and can be asked again)"><input type="checkbox" id="predictOn"> Predict my choices</label>
     <button id="germBtn" class="dl-yellow" title="Starting germs for new algorithms, from your thoughts">Disabled</button>
     <button id="tabLearn" class="dl-tab" aria-controls="learn">Classroom</button>
@@ -70,9 +71,5 @@
     <button id="restartBtn" title="Start this again">Start again</button>
   </footer>
 
-  <div id="buddy" class="dl-buddy" aria-live="polite">
-    <div id="buddyBubble" class="dl-bubble hidden"></div>
-    <button id="buddyFig" class="dl-fig" title="Your companion (click to change)" aria-label="Companion"></button>
-  </div>
 </body>
 </html>

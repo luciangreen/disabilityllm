@@ -122,40 +122,50 @@ export function setProgress(section, overall, handlers = {}) {
   $('restartBtn').disabled = !footer.restart;
 }
 
-// ---- the companion in the corner ----
+// ---- the companion: a character the one chatbot becomes for a while ----
+// It isn't a second chatbot. When it has a side idea, the chatbot (the desktop's, inside LucianOS)
+// takes on its face and name and dances while it speaks, then goes back to being itself.
+const BG = '<rect width="100" height="100" fill="#1b2236"/>';
 const FIGS = {
-  tiger: `<svg viewBox="0 0 100 100" role="img" aria-label="A tiger cub"><ellipse cx="50" cy="74" rx="22" ry="18" fill="#f39a2b"/><path d="M36 64 l6 18 M50 60 l0 22 M64 64 l-6 18" stroke="#3a2a12" stroke-width="3"/><circle cx="50" cy="42" r="22" fill="#f6a23a"/><circle cx="32" cy="24" r="7" fill="#f6a23a"/><circle cx="68" cy="24" r="7" fill="#f6a23a"/><circle cx="32" cy="24" r="3.5" fill="#fde2c2"/><circle cx="68" cy="24" r="3.5" fill="#fde2c2"/><path d="M38 28 l4 8 M50 24 l0 8 M62 28 l-4 8" stroke="#3a2a12" stroke-width="3"/><ellipse cx="50" cy="52" rx="11" ry="8" fill="#fde2c2"/><circle cx="41" cy="40" r="3.2" fill="#1d1a16"/><circle cx="59" cy="40" r="3.2" fill="#1d1a16"/><path d="M47 49 h6 l-3 3z" fill="#3a2a12"/><path d="M50 52 q-4 4 -7 2 M50 52 q4 4 7 2" stroke="#3a2a12" stroke-width="1.6" fill="none"/><path d="M72 80 q14 -2 12 -16" stroke="#f39a2b" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`,
-  child: `<svg viewBox="0 0 100 100" role="img" aria-label="A child in a star costume"><path d="M50 4 l7 14 15 2 -11 10 3 15 -14 -7 -14 7 3 -15 -11 -10 15 -2z" fill="#f7d33a" stroke="#c9a400" stroke-width="2"/><circle cx="50" cy="30" r="12" fill="#f1c9a5"/><circle cx="45" cy="29" r="1.8" fill="#222"/><circle cx="55" cy="29" r="1.8" fill="#222"/><path d="M45 35 q5 4 10 0" stroke="#7a3b2a" stroke-width="1.6" fill="none"/><path d="M36 48 h28 l6 30 h-40z" fill="#5b7be6"/><path d="M36 52 l-12 14 M64 52 l12 14" stroke="#f1c9a5" stroke-width="5" stroke-linecap="round"/><path d="M42 78 v16 M58 78 v16" stroke="#3b3b55" stroke-width="6" stroke-linecap="round"/></svg>`
+  tiger: { name: 'Tiger cub', svg: `<circle cx="50" cy="96" r="30" fill="#f39a2b"/><path d="M38 82 l5 14 M50 78 l0 18 M62 82 l-5 14" stroke="#3a2a12" stroke-width="3"/><circle cx="50" cy="48" r="28" fill="#f6a23a"/><circle cx="27" cy="25" r="9" fill="#f6a23a"/><circle cx="73" cy="25" r="9" fill="#f6a23a"/><circle cx="27" cy="25" r="4.5" fill="#fde2c2"/><circle cx="73" cy="25" r="4.5" fill="#fde2c2"/><path d="M36 30 l5 9 M50 25 l0 10 M64 30 l-5 9" stroke="#3a2a12" stroke-width="3"/><ellipse cx="50" cy="60" rx="14" ry="10" fill="#fde2c2"/><circle cx="39" cy="45" r="4" fill="#1d1a16"/><circle cx="61" cy="45" r="4" fill="#1d1a16"/><path d="M46 56 h8 l-4 4z" fill="#3a2a12"/><path d="M50 60 q-5 5 -9 2 M50 60 q5 5 9 2" stroke="#3a2a12" stroke-width="1.8" fill="none"/>`,
+    landmarks: { eyeL: [156, 180], eyeR: [244, 180], mouth: [200, 252], mouthW: 64, chin: [200, 284] } },
+  child: { name: 'Star child', svg: `<path d="M50 2 l9 16 18 3 -13 12 3 18 -17 -9 -17 9 3 -18 -13 -12 18 -3z" fill="#f7d33a" stroke="#c9a400" stroke-width="2"/><circle cx="50" cy="46" r="24" fill="#f1c9a5"/><circle cx="41" cy="44" r="3" fill="#222"/><circle cx="59" cy="44" r="3" fill="#222"/><path d="M42 56 q8 6 16 0" stroke="#7a3b2a" stroke-width="2" fill="none"/><path d="M28 74 h44 l6 26 h-56z" fill="#5b7be6"/>`,
+    landmarks: { eyeL: [164, 176], eyeR: [236, 176], mouth: [200, 228], mouthW: 60, chin: [200, 268] } }
 };
-const buddy = { lastInput: 0, lastResolved: 0, lastSpoke: 0, problem: null, turn: 0, concentrating: false };
+const lent = {};
+function companionFace() {
+  const k = FIGS[saved.settings.buddy] ? saved.settings.buddy : 'tiger';
+  if (!lent[k]) {
+    const f = FIGS[k];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 100 100">${BG}${f.svg}</svg>`;
+    lent[k] = { name: f.name, image: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`, landmarks: f.landmarks };
+  }
+  return lent[k];
+}
+const buddy = { lastInput: 0, lastResolved: 0, lastSpoke: 0, problem: null, turn: 0, concentrating: false, fix: null };
 export const companion = {
   resolved() { buddy.lastResolved = Date.now(); },
-  problem(text) { buddy.problem = text || null; },
+  problem(text, fix = null) { buddy.problem = text || null; buddy.fix = text ? fix : null; },
   concentrating(on) { buddy.concentrating = !!on; },
-  say(text, { action } = {}) { showBubble(text, action); }
+  say(text, { action } = {}) { companionSays(text, action); }
 };
-function showBubble(text, action) {
-  const b = $('buddyBubble');
-  b.replaceChildren(...[el('div', {}, text), action ? el('button', { onclick: () => { action.run(); b.classList.add('hidden'); } }, action.label) : null, el('button', { onclick: () => b.classList.add('hidden'), 'aria-label': 'Close' }, '×')].filter(Boolean));
-  b.classList.remove('hidden');
-  $('buddyFig').classList.add('dancing');
-  clearTimeout(showBubble.t);
-  showBubble.t = setTimeout(() => { b.classList.add('hidden'); $('buddyFig').classList.remove('dancing'); }, 14000);
+function companionSays(text, action) {
+  character?.say(text, { as: companionFace(), action: action ?? null })?.catch?.(() => {});
 }
 function startCompanion() {
-  const fig = $('buddyFig');
-  const draw = () => { fig.innerHTML = FIGS[saved.settings.buddy] ?? FIGS.tiger; };
-  draw();
-  fig.addEventListener('click', () => { saved.settings.buddy = saved.settings.buddy === 'tiger' ? 'child' : 'tiger'; save(); draw(); });
+  const pick = $('buddyPick');
+  pick.value = FIGS[saved.settings.buddy] ? saved.settings.buddy : 'tiger';
+  pick.addEventListener('change', () => { saved.settings.buddy = pick.value; save(); companionSays(`I'm the ${FIGS[pick.value].name.toLowerCase()} now.`); });
   const typed = () => { buddy.lastInput = Date.now(); };
   addEventListener('keydown', typed, true);
   addEventListener('input', typed, true);
   addEventListener('pointerdown', typed, true);
   setInterval(() => {
+    if (!character || character.focused?.() === false || document.visibilityState === 'hidden') return; // not while you're elsewhere
     const d = decide({ ...buddy, thoughts: saved.thoughts }, Date.now());
     if (d.act === 'quiet') return;
     buddy.lastSpoke = Date.now(); buddy.turn++;
-    showBubble(d.text, d.act === 'fix' && buddy.fix ? buddy.fix : null);
+    companionSays(d.text, d.act === 'fix' && buddy.fix ? buddy.fix : null);
   }, 2000);
 }
 
@@ -178,7 +188,7 @@ async function main() {
   $('ffBtn').addEventListener('click', () => footer.ff?.());
   $('restartBtn').addEventListener('click', () => footer.restart?.());
 
-  const ctx = { el, store, save, runProlog, setProgress, companion, say, onSpoken, year: () => Number(saved.settings.year) || 7, predicting: () => saved.settings.predict !== false, bands: BANDS };
+  const ctx = { el, store, save, runProlog, setProgress, companion, say, onSpoken, year: () => Number(saved.settings.year) || 7, predicting: () => saved.settings.predict !== false, bands: BANDS, inDesktop: () => !!character?.inDesktop };
   const applaud = mountApplaud(ctx);
   ctx.toWork = (code, examples, name) => { applaud.load(code, examples, name); setPane('work', true); };
   const classroom = mountClassroom(ctx);
